@@ -1,9 +1,9 @@
 *Attention*: This is a clone repository, with some changes that I believe to be interesting.
 
 -New stuffs:
---Put custom camera do draw particle
---OpacityInterpolator2 with 3 states (initial,medium,final)
---ParticleEffect now have play/pause
+--Put custom camera do draw particle<br />
+--OpacityInterpolator2 with 3 states (initial,medium,final)<br />
+--ParticleEffect now have play/pause<br />
 --Emmiter have 'public bool Loop', when false, the particle will show only one time. But if you want to show again, set "ForceLoop = true" at any time.
 
 
