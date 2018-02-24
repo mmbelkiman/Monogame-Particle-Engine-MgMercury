@@ -1,6 +1,8 @@
 *Attention*: This is a clone repository, with some changes that I believe to be interesting.
 
 -New stuffs:
+
+
 --Put custom camera do draw particle<br />
 --OpacityInterpolator2 with 3 states (initial,medium,final)<br />
 --ParticleEffect now have play/pause<br />
