@@ -7,8 +7,10 @@ namespace MonoGameMPE.Core
     {
         public string Name { get; set; }
         public Emitter[] Emitters { get; set; }
+        private bool active = true;
 
-        public ParticleEffect() {
+        public ParticleEffect()
+        {
             Emitters = new Emitter[0];
         }
 
@@ -27,6 +29,7 @@ namespace MonoGameMPE.Core
 
         public void Update(float elapsedSeconds)
         {
+            if (!active) return;
             foreach (var e in Emitters)
                 e.Update(elapsedSeconds);
         }
@@ -42,5 +45,21 @@ namespace MonoGameMPE.Core
             foreach (var e in Emitters)
                 e.Trigger(line);
         }
+
+        public void Play()
+        {
+            active = true;
+        }
+
+        public void Pause()
+        {
+            active = false;
+        }
+
+        public void PlayPause()
+        {
+            active = !active;
+        }
+
     }
 }

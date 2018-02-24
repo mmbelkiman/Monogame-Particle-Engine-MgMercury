@@ -9,7 +9,8 @@ namespace MonoGameMPE.Core
     public unsafe class Emitter : IDisposable
     {
 
-        public Emitter(int capacity, TimeSpan term, Profile profile) {
+        public Emitter(int capacity, TimeSpan term, Profile profile)
+        {
             if (profile == null)
                 throw new ArgumentNullException(nameof(profile));
 
@@ -22,20 +23,20 @@ namespace MonoGameMPE.Core
             ModifierExecutionStrategy = ModifierExecutionStrategy.Serial;
             Parameters = new ReleaseParameters();
         }
-        
+
         private readonly float _term;
 
         private float _totalSeconds;
         internal readonly ParticleBuffer Buffer;
-        
+
         public int ActiveParticles => Buffer.Count;
-        
+
         public Vector Offset { get; set; }
-        
+
         public IModifier[] Modifiers { get; set; }
-        
+
         public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
-        
+
         public Profile Profile { get; }
         public ReleaseParameters Parameters { get; set; }
         public BlendMode BlendMode { get; set; }
@@ -43,12 +44,20 @@ namespace MonoGameMPE.Core
 
         public Texture2D Texture { get; set; }
 
+        public float ReclaimFrequency { get; set; }
+
+        public bool HasExpired = false;
+        public bool Loop = true;
+        public bool ForceLoop = false;
+
+        private float _secondsSinceLastReclaim;
+
         private void ReclaimExpiredParticles()
         {
-
             var iterator = Buffer.Iterator;
 
             var expired = 0;
+            HasExpired = false;
 
             while (iterator.HasNext)
             {
@@ -60,15 +69,26 @@ namespace MonoGameMPE.Core
                 expired++;
             }
             if (expired != 0)
-                Buffer.Reclaim(expired);
+            {
+                if (Loop || ForceLoop) Buffer.Reclaim(expired);
+                HasExpired = true;
+            }
         }
 
-        public void Update(float elapsedSeconds) {
+        public void Update(float elapsedSeconds)
+        {
             _totalSeconds += elapsedSeconds;
+            _secondsSinceLastReclaim += elapsedSeconds;
 
             if (Buffer.Count == 0)
             {
                 return;
+            }
+
+            if (_secondsSinceLastReclaim > (1f / ReclaimFrequency))
+            {
+                ReclaimExpiredParticles();
+                _secondsSinceLastReclaim -= (1f / ReclaimFrequency);
             }
 
             ReclaimExpiredParticles();
@@ -86,23 +106,27 @@ namespace MonoGameMPE.Core
             ModifierExecutionStrategy.ExecuteModifiers(Modifiers, elapsedSeconds, iterator);
         }
 
-        public void Trigger(Vector position) {
+        public void Trigger(Vector position)
+        {
             var numToRelease = FastRand.NextInteger(Parameters.Quantity);
 
             Release(position + Offset, numToRelease);
         }
 
-        public void Trigger(LineSegment line) {
+        public void Trigger(LineSegment line)
+        {
             var numToRelease = FastRand.NextInteger(Parameters.Quantity);
             var lineVector = line.ToVector();
 
-            for (var i = 0; i < numToRelease; i++) {
+            for (var i = 0; i < numToRelease; i++)
+            {
                 var offset = lineVector * FastRand.NextSingle();
                 Release(line.Origin + offset, 1);
             }
         }
 
-        private void Release(Vector position, int numToRelease) {
+        private void Release(Vector position, int numToRelease)
+        {
             var iterator = Buffer.Release(numToRelease);
 
             while (iterator.HasNext)
@@ -125,20 +149,22 @@ namespace MonoGameMPE.Core
 
                 FastRand.NextColour(out particle->Colour, Parameters.Colour);
 
-                particle->Opacity  = FastRand.NextSingle(Parameters.Opacity);
+                particle->Opacity = FastRand.NextSingle(Parameters.Opacity);
                 var scale = FastRand.NextSingle(Parameters.Scale);
-                particle->Scale    = new Vector(scale, scale);
+                particle->Scale = new Vector(scale, scale);
                 particle->Rotation = FastRand.NextSingle(Parameters.Rotation);
-                particle->Mass     = FastRand.NextSingle(Parameters.Mass);
+                particle->Mass = FastRand.NextSingle(Parameters.Mass);
             }
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Buffer.Dispose();
             GC.SuppressFinalize(this);
         }
 
-        ~Emitter() {
+        ~Emitter()
+        {
             Dispose();
         }
     }

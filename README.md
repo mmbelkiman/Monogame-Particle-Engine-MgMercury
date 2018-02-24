@@ -1,7 +1,13 @@
-*Update*: This project has been merged into [Monogame Extended](https://github.com/craftworkgames/MonoGame.Extended). I'm currently not working on a project that needs this engine, but if I need it in the future I'll probably write up an editor for effects and maybe a renderer that hands out some work to the GPU (not sure about performance right now, but a faster renderer is definitely possible).
+*Attention*: This is a clone repository, with some changes that I believe to be interesting.
+
+-New stuffs:
+--Put custom camera do draw particle
+--OpacityInterpolator2 with 3 states (initial,medium,final)
+--ParticleEffect now have play/pause
+--Emmiter have 'public bool Loop', when false, the particle will show only one time. But if you want to show again, set "ForceLoop = true" at any time.
 
 
-This is a version of the [Mercury Particle Engine](https://github.com/Matthew-Davey/mercury-particle-engine) usable with [MonoGame](https://github.com/mono/MonoGame). Basically to use the MPE all that's needed is a renderer that uses the MonoGame SpriteBatch and functions to convert HSL color to RGB. I made some other changes however, that made the engine more convenient to use IMO.
+This is a version of the [MgMercury ](https://github.com/Jjagg/MgMercury) usable with [MonoGame](https://github.com/mono/MonoGame).
 
 # Structure
 Let's see how this all works! :)
