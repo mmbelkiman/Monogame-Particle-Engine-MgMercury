@@ -35,9 +35,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.5.0.828, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,6 +71,7 @@
     <Compile Include="Core\Modifiers\OpacityInterpolator2.cs" />
     <Compile Include="Core\Modifiers\RotationModifier.cs" />
     <Compile Include="Core\Modifiers\ScaleInterpolator2.cs" />
+    <Compile Include="Core\Modifiers\VelocityColourInfiniteModifier.cs" />
     <Compile Include="Core\Modifiers\VelocityColourModifier.cs" />
     <Compile Include="Core\Modifiers\VelocityHueModifier.cs" />
     <Compile Include="Core\Modifiers\VortexModifier.cs" />
