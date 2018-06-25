@@ -11,13 +11,13 @@ namespace MonoGameMPE.Core
         public void Draw(ParticleEffect effect, SpriteBatch s, Matrix cameraView)
         {
             foreach (var emitter in effect.Emitters)
-                Draw(emitter, s, cameraView);
+                Draw(emitter.Value, s, cameraView);
         }
 
         public void Draw(ParticleEffect effect, SpriteBatch s)
         {
             foreach (var emitter in effect.Emitters)
-                Draw(emitter, s);
+                Draw(emitter.Value, s);
         }
 
         private unsafe void Draw(Emitter emitter, SpriteBatch spriteBatch)

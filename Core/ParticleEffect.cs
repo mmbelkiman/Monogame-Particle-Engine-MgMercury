@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MonoGameMPE.Core
 {
@@ -6,15 +7,15 @@ namespace MonoGameMPE.Core
     public class ParticleEffect
     {
         public string Name { get; set; }
-        public Emitter[] Emitters { get; set; }
+        public Dictionary<string, Emitter> Emitters { get; set; }
         private bool active = true;
 
         public ParticleEffect()
         {
-            Emitters = new Emitter[0];
+            Emitters = new Dictionary<string, Emitter>();
         }
 
-        public int ActiveParticles => Emitters.Sum(t => t.ActiveParticles);
+        public int ActiveParticles => Emitters.Sum(t =>  t.Value.ActiveParticles);
 
         public void FastForward(Vector position, float seconds, float triggerPeriod)
         {
@@ -31,19 +32,21 @@ namespace MonoGameMPE.Core
         {
             if (!active) return;
             foreach (var e in Emitters)
-                e.Update(elapsedSeconds);
+            {
+                e.Value.Update(elapsedSeconds);
+            }
         }
 
         public void Trigger(Vector position)
         {
             foreach (var e in Emitters)
-                e.Trigger(position);
+                e.Value.Trigger(position);
         }
 
         public void Trigger(LineSegment line)
         {
             foreach (var e in Emitters)
-                e.Trigger(line);
+                e.Value.Trigger(line);
         }
 
         public void Play()

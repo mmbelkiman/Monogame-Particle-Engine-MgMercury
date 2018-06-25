@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameMPE.Core.Modifiers;
 using MonoGameMPE.Core.Profiles;
@@ -19,7 +20,7 @@ namespace MonoGameMPE.Core
             Buffer = new ParticleBuffer(capacity);
             Offset = new Vector();
             Profile = profile;
-            Modifiers = new IModifier[0];
+            Modifiers = new Dictionary<string, IModifier>();
             ModifierExecutionStrategy = ModifierExecutionStrategy.Serial;
             Parameters = new ReleaseParameters();
         }
@@ -33,7 +34,7 @@ namespace MonoGameMPE.Core
 
         public Vector Offset { get; set; }
 
-        public IModifier[] Modifiers { get; set; }
+        public Dictionary<string, IModifier> Modifiers { get; set; }
 
         public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
 
