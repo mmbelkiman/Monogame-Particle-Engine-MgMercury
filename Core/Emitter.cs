@@ -9,7 +9,6 @@ namespace MonoGameMPE.Core
 
     public unsafe class Emitter : IDisposable
     {
-
         public Emitter(int capacity, TimeSpan term, Profile profile)
         {
             if (profile == null)
@@ -25,10 +24,22 @@ namespace MonoGameMPE.Core
             Parameters = new ReleaseParameters();
         }
 
-        private readonly float _term;
+        public int Capacity
+        {
+            get { return Buffer.Size; }
+            set { Buffer = new ParticleBuffer(value); }
+        }
+
+        public TimeSpan Term
+        {
+            set { _term = (float)value.TotalSeconds; }
+            get { return TimeSpan.FromSeconds(_term); }
+        }
+
+        private float _term;
 
         private float _totalSeconds;
-        internal readonly ParticleBuffer Buffer;
+        internal ParticleBuffer Buffer;
 
         public int ActiveParticles => Buffer.Count;
 

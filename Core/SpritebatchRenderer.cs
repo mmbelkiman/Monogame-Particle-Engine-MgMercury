@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace MonoGameMPE.Core
 {
@@ -8,10 +9,10 @@ namespace MonoGameMPE.Core
         /// <summary>
         /// Draw a particle effect. This draw function calls spritebatch.Begin() and .End()
         /// </summary>
-        public void Draw(ParticleEffect effect, SpriteBatch s, Matrix cameraView)
+        public void Draw(ParticleEffect effect, SpriteBatch spriteBatch, Matrix cameraView, SpriteEffects effects, float layerDepth)
         {
             foreach (var emitter in effect.Emitters)
-                Draw(emitter.Value, s, cameraView);
+                Draw(emitter.Value, spriteBatch, cameraView, effects, layerDepth);
         }
 
         public void Draw(ParticleEffect effect, SpriteBatch s)
@@ -41,20 +42,25 @@ namespace MonoGameMPE.Core
                     if (blendState == BlendState.AlphaBlend) color *= particle->Opacity;
                     else color.A = (byte)(particle->Opacity * 255);
 
-                    spriteBatch.Draw(texture,
+                    SpriteEffects effects = SpriteEffects.None;
+                    float layerDepth = 0;
+
+                    spriteBatch.Draw(
+                        texture,
                         new Vector2(particle->Position.X, particle->Position.Y),
-                        null, null, origin,
+                        null,
+                        new Color(color, particle->Opacity),
                         particle->Rotation,
+                        origin,
                         new Vector2(particle->Scale.X / texture.Width, particle->Scale.Y / texture.Height),
-                        new Color(color, particle->Opacity));
+                        effects,
+                        layerDepth);
                 }
             }
             spriteBatch.End();
-
         }
 
-
-        private unsafe void Draw(Emitter emitter, SpriteBatch spriteBatch, Matrix cameraView)
+        private unsafe void Draw(Emitter emitter, SpriteBatch spriteBatch, Matrix cameraView, SpriteEffects effects, float layerDepth)
         {
             var texture = emitter.Texture;
             var origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
@@ -75,16 +81,19 @@ namespace MonoGameMPE.Core
                     if (blendState == BlendState.AlphaBlend) color *= particle->Opacity;
                     else color.A = (byte)(particle->Opacity * 255);
 
-                    spriteBatch.Draw(texture,
+                    spriteBatch.Draw(
+                        texture,
                         new Vector2(particle->Position.X, particle->Position.Y),
-                        null, null, origin,
+                        null,
+                        new Color(color, particle->Opacity),
                         particle->Rotation,
+                        origin,
                         new Vector2(particle->Scale.X / texture.Width, particle->Scale.Y / texture.Height),
-                        new Color(color, particle->Opacity));
+                        effects,
+                        layerDepth);
                 }
             }
             spriteBatch.End();
-
         }
     }
 }
