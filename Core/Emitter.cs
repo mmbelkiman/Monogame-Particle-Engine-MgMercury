@@ -49,7 +49,7 @@ namespace MonoGameMPE.Core
 
         public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
 
-        public Profile Profile { get; }
+        public Profile Profile { get; set; }
         public ReleaseParameters Parameters { get; set; }
         public BlendMode BlendMode { get; set; }
         public string TextureKey { get; set; }
