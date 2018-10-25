@@ -1,5 +1,7 @@
-﻿namespace MonoGameMPE.Core {
-    public enum RenderingOrder {
+﻿namespace MonoGameMPE.Core
+{
+    public enum RenderingOrder
+    {
         FrontToBack,
         BackToFront
     }

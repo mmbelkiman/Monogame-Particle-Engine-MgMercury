@@ -4,7 +4,8 @@ namespace MonoGameMPE.Core
 {
     public struct ColourRange
     {
-        public ColourRange(Colour min, Colour max) {
+        public ColourRange(Colour min, Colour max)
+        {
             Min = min;
             Max = max;
         }
@@ -38,7 +39,8 @@ namespace MonoGameMPE.Core
             return "[" + Min + ';' + Max + ']';
         }
 
-        public static implicit operator ColourRange(Colour value) {
+        public static implicit operator ColourRange(Colour value)
+        {
             return new ColourRange(value, value);
         }
     }

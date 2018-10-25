@@ -1,5 +1,7 @@
-﻿namespace MonoGameMPE.Core {
-    public enum BlendMode {
+﻿namespace MonoGameMPE.Core
+{
+    public enum BlendMode
+    {
         Alpha,
         Add,
         Subtract

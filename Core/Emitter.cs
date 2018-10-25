@@ -43,6 +43,9 @@ namespace MonoGameMPE.Core
 
         public int ActiveParticles => Buffer.Count;
 
+        public SpriteEffects SpriteEffects = SpriteEffects.None;
+        public float LayerDepth = 0;
+
         public Vector Offset { get; set; }
 
         public Dictionary<string, IModifier> Modifiers { get; set; }
@@ -121,6 +124,7 @@ namespace MonoGameMPE.Core
         public void Trigger(Vector position)
         {
             var numToRelease = FastRand.NextInteger(Parameters.Quantity);
+            Console.WriteLine("oi [numToRelease] " + numToRelease);
 
             Release(position + Offset, numToRelease);
         }

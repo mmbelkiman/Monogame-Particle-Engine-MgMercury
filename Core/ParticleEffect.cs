@@ -15,7 +15,7 @@ namespace MonoGameMPE.Core
             Emitters = new Dictionary<string, Emitter>();
         }
 
-        public int ActiveParticles => Emitters.Sum(t =>  t.Value.ActiveParticles);
+        public int ActiveParticles => Emitters.Sum(t => t.Value.ActiveParticles);
 
         public void FastForward(Vector position, float seconds, float triggerPeriod)
         {
