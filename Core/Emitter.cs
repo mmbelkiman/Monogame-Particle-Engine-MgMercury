@@ -37,6 +37,8 @@ namespace MonoGameMPE.Core
         }
 
         private float _term;
+        private int _lastQuantity = -1;
+        private int _countToChangeQuantity = 0;
 
         private float _totalSeconds;
         internal ParticleBuffer Buffer;
@@ -124,7 +126,21 @@ namespace MonoGameMPE.Core
         public void Trigger(Vector position)
         {
             var numToRelease = FastRand.NextInteger(Parameters.Quantity);
-            Console.WriteLine("oi [numToRelease] " + numToRelease);
+
+            if (_lastQuantity != Parameters.Quantity.Min)
+            {
+                if (_lastQuantity > 0)
+                    _countToChangeQuantity = 100;
+
+                _lastQuantity = Parameters.Quantity.Min;
+                numToRelease = 0;
+            }
+
+            if (_countToChangeQuantity > 0)
+            {
+                _countToChangeQuantity--;
+                numToRelease = 0;
+            }
 
             Release(position + Offset, numToRelease);
         }

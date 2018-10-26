@@ -57,8 +57,6 @@ namespace MonoGameMPE.Core
             Tail += numToRelease;
             if (Tail >= BufferEnd) Tail -= Size + 1;
 
-            Console.WriteLine("oi [numToRelease] " + numToRelease + " || " + prevCount + " /" + Count + " ");
-
 
             return Iterator.Reset(prevCount);
         }
