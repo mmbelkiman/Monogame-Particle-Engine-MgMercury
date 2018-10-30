@@ -8,11 +8,34 @@ namespace MonoGameMPE.Core.Modifiers
         public float MediumOpacity { get; set; }
         public float FinalOpacity { get; set; }
 
+        private float LastInitialOpacity = 0;
+        private float LastMediumOpacity = 0;
+        private float LastFinalOpacity = 0;
+
         private bool doMedium = true;
         private bool atFinal = false;
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {
+            if (LastInitialOpacity != InitialOpacity)
+            {
+                InitialOpacity = LastInitialOpacity;
+                doMedium = true;
+                atFinal = false;
+            }
+            if (LastMediumOpacity != InitialOpacity)
+            {
+                MediumOpacity = LastMediumOpacity;
+                doMedium = true;
+                atFinal = false;
+            }
+            if (LastFinalOpacity != InitialOpacity)
+            {
+                FinalOpacity = LastFinalOpacity;
+                doMedium = true;
+                atFinal = false;
+            }
+
             var delta = MediumOpacity - InitialOpacity;
             var delta2 = FinalOpacity - MediumOpacity;
             bool mediumIsLowerInitial = (MediumOpacity - InitialOpacity) >= 0 ? false : true;
@@ -51,11 +74,9 @@ namespace MonoGameMPE.Core.Modifiers
                     || (!mediumIsLowerFinal && particle->Opacity <= FinalOpacity)
                     )
                     {
-
                         atFinal = true;
                     }
                 }
-
             }
         }
     }
