@@ -2,11 +2,35 @@
 
 namespace MonoGameMPE.Core.Profiles
 {
-    public abstract class Profile : ICloneable
+    [Serializable]
+    public class Profile : ICloneable
     {
+        public string Name = "";
 
-        public abstract void GetOffsetAndHeading(out Vector offset,
-            out Axis heading);
+        public Axis Axis { get; set; }
+        public float Length { get; set; }
+        public Axis Direction { get; set; }
+        public float Spread { get; set; }
+        public float Radius { get; set; }
+        public CircleRadiation Radiate { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+
+        public enum EnumEmitterProfiles { Profile, BoxProfile, BoxFillProfile, BoxUniformProfile, CircleProfile, LineProfile, PointProfile, RingProfile, SprayProfile };
+
+        public Profile()
+        {
+
+            Name = ToString();
+  
+
+        }
+
+        public virtual void GetOffsetAndHeading(out Vector offset, out Axis heading)
+        {
+            offset = Vector.Zero;
+            FastRand.NextUnitVector(out heading);
+        }
 
         public object Clone()
         {
@@ -90,7 +114,10 @@ namespace MonoGameMPE.Core.Profiles
 
         public override string ToString()
         {
-            return GetType().ToString();
+            int startNameProfile = GetType().ToString().LastIndexOf(".") + 1;
+            string profileName = GetType().ToString().Substring(startNameProfile);
+
+            return profileName;
         }
     }
 }

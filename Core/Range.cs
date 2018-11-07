@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -119,12 +120,14 @@ namespace MonoGameMPE.Core
         /// Gets the interior of the interval. The interior is the largest proper interval contained
         /// within this interval.
         /// </summary>
+        [JsonIgnore]
         public Range Interior => new Range(Min + 1, Max - 1);
 
         /// <summary>
         /// Gets the closure of the interval. The closure is the smallest proper interval which
         /// contains this interval.
         /// </summary>
+        [JsonIgnore]
         public Range Closure => new Range(Min - 1, Max + 1);
 
         /// <summary>

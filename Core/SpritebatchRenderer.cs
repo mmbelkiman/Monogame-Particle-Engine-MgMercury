@@ -13,6 +13,7 @@ namespace MonoGameMPE.Core
 
         private static unsafe void DrawParticle(Emitter emitter, SpriteBatch spriteBatch)
         {
+            if (emitter.Texture == null) return;
             var texture = emitter.Texture;
             var origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 

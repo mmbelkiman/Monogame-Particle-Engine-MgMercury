@@ -1,5 +1,8 @@
-﻿namespace MonoGameMPE.Core
+﻿using System;
+
+namespace MonoGameMPE.Core
 {
+    [Serializable]
     public class ReleaseParameters
     {
         public ReleaseParameters()

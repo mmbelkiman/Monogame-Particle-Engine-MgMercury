@@ -2,9 +2,6 @@
 {
     public class BoxProfile : Profile
     {
-        public float Width { get; set; }
-        public float Height { get; set; }
-
         public override void GetOffsetAndHeading(out Vector offset, out Axis heading)
         {
             switch (FastRand.NextInteger(3))

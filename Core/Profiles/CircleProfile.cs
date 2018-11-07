@@ -2,9 +2,6 @@
 {
     public class CircleProfile : Profile
     {
-        public float Radius { get; set; }
-        public CircleRadiation Radiate { get; set; }
-
         public override void GetOffsetAndHeading(out Vector offset, out Axis heading)
         {
             var dist = FastRand.NextSingle(0f, Radius);

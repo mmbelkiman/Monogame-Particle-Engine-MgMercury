@@ -7,9 +7,9 @@ namespace MonoGameMPE.Core
     /// </summary>
     public struct Axis : IEquatable<Axis>
     {
-        public readonly float X;
+        public float X;
 
-        public readonly float Y;
+        public float Y;
 
         public float Angle => (float)Math.Atan2(Y, X);
 

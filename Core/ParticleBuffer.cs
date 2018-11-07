@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace MonoGameMPE.Core
 {
+    [Serializable]
     public class ParticleBuffer : IDisposable
     {
         private readonly IntPtr _nativePointer;

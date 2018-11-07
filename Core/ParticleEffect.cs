@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MonoGameMPE.Core
 {
-
+    [Serializable]
     public class ParticleEffect
     {
         public string Name { get; set; }

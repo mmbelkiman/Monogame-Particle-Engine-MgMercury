@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameMPE.Core.Modifiers;
 using MonoGameMPE.Core.Profiles;
+using Newtonsoft.Json;
 
 namespace MonoGameMPE.Core
 {
-
+    [Serializable]
     public unsafe class Emitter : IDisposable
     {
         public Emitter(int capacity, TimeSpan term, Profile profile)
@@ -18,7 +20,20 @@ namespace MonoGameMPE.Core
 
             Buffer = new ParticleBuffer(capacity);
             Offset = new Vector();
-            Profile = profile;
+
+            switch (profile.Name)
+            {
+                case nameof(Profile.EnumEmitterProfiles.PointProfile):
+                    Profile = Profile.Point();
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.CircleProfile):
+                    Profile = Profile.Circle(profile.Radius, profile.Radiate);
+                    break;
+            }
+
+            if (Profile == null)
+                Profile = profile;
+
             Modifiers = new Dictionary<string, IModifier>();
             ModifierExecutionStrategy = ModifierExecutionStrategy.Serial;
             Parameters = new ReleaseParameters();
@@ -48,18 +63,24 @@ namespace MonoGameMPE.Core
         public SpriteEffects SpriteEffects = SpriteEffects.None;
         public float LayerDepth = 0;
 
+        [JsonIgnore]
         public Vector Offset { get; set; }
 
+        [JsonIgnore]
         public Dictionary<string, IModifier> Modifiers { get; set; }
 
+        [JsonIgnore]
         public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
 
         public Profile Profile { get; set; }
+
+        [JsonIgnore]
+        public Texture2D Texture { get; set; }
+
         public ReleaseParameters Parameters { get; set; }
         public BlendMode BlendMode { get; set; }
-        public string TextureKey { get; set; }
 
-        public Texture2D Texture { get; set; }
+        public string TextureKey { get; set; }
 
         public float ReclaimFrequency { get; set; }
 
