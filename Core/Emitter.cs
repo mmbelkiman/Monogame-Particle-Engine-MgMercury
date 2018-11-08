@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameMPE.Core.Modifiers;
 using MonoGameMPE.Core.Profiles;
@@ -23,11 +22,29 @@ namespace MonoGameMPE.Core
 
             switch (profile.Name)
             {
-                case nameof(Profile.EnumEmitterProfiles.PointProfile):
-                    Profile = Profile.Point();
+                case nameof(Profile.EnumEmitterProfiles.BoxFillProfile):
+                    Profile = Profile.BoxFill(profile.Width, profile.Height);
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.BoxProfile):
+                    Profile = Profile.Box(profile.Width, profile.Height);
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.BoxUniformProfile):
+                    Profile = Profile.BoxUniform(profile.Width, profile.Height);
                     break;
                 case nameof(Profile.EnumEmitterProfiles.CircleProfile):
                     Profile = Profile.Circle(profile.Radius, profile.Radiate);
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.LineProfile):
+                    Profile = Profile.Line(profile.Axis, profile.Length);
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.PointProfile):
+                    Profile = Profile.Point();
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.RingProfile):
+                    Profile = Profile.Ring(profile.Radius, profile.Radiate);
+                    break;
+                case nameof(Profile.EnumEmitterProfiles.SprayProfile):
+                    Profile = Profile.Spray(profile.Direction, profile.Spread);
                     break;
             }
 
@@ -35,7 +52,8 @@ namespace MonoGameMPE.Core
                 Profile = profile;
 
             Modifiers = new Dictionary<string, IModifier>();
-            ModifierExecutionStrategy = ModifierExecutionStrategy.Serial;
+            ModifierExecutionStrategy = ModifierExecutionStrategy.Serial();
+
             Parameters = new ReleaseParameters();
         }
 
@@ -63,26 +81,25 @@ namespace MonoGameMPE.Core
         public SpriteEffects SpriteEffects = SpriteEffects.None;
         public float LayerDepth = 0;
 
-        [JsonIgnore]
-        public Vector Offset { get; set; }
-
-        [JsonIgnore]
-        public Dictionary<string, IModifier> Modifiers { get; set; }
-
-        [JsonIgnore]
-        public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
-
-        public Profile Profile { get; set; }
-
-        [JsonIgnore]
-        public Texture2D Texture { get; set; }
-
-        public ReleaseParameters Parameters { get; set; }
         public BlendMode BlendMode { get; set; }
 
         public string TextureKey { get; set; }
 
         public float ReclaimFrequency { get; set; }
+
+        public Vector Offset { get; set; }
+
+        public Dictionary<string, IModifier> Modifiers { get; set; }
+
+        public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
+
+        public Profile Profile { get; set; }
+
+        public ReleaseParameters Parameters { get; set; }
+
+        //TODO
+        [JsonIgnore]
+        public Texture2D Texture { get; set; }
 
         public bool HasExpired = false;
         public bool Loop = true;

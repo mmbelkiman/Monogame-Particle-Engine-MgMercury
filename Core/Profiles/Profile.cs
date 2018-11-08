@@ -20,10 +20,7 @@ namespace MonoGameMPE.Core.Profiles
 
         public Profile()
         {
-
             Name = ToString();
-  
-
         }
 
         public virtual void GetOffsetAndHeading(out Vector offset, out Axis heading)
