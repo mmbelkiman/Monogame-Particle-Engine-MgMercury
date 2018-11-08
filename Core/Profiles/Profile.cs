@@ -11,10 +11,10 @@ namespace MonoGameMPE.Core.Profiles
         public float Length { get; set; }
         public Axis Direction { get; set; }
         public float Spread { get; set; }
-        public float Radius { get; set; }
-        public CircleRadiation Radiate { get; set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
+        public float Radius = 100;
+        public CircleRadiation Radiate = CircleRadiation.In;
+        public float Width = 100;
+        public float Height = 100;
 
         public enum EnumEmitterProfiles { Profile, BoxProfile, BoxFillProfile, BoxUniformProfile, CircleProfile, LineProfile, PointProfile, RingProfile, SprayProfile };
 

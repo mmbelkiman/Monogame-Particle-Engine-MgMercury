@@ -122,16 +122,18 @@ namespace MonoGameMPE.Core
         /// Gets the interior of the interval. The interior is the largest proper interval contained
         /// within this interval.
         /// </summary>
-        [JsonIgnore]
-        public RangeF Interior => new RangeF(Min + float.Epsilon, Max - float.Epsilon);
-
+        public RangeF Interior()
+        {
+            return new RangeF(Min + float.Epsilon, Max - float.Epsilon);
+        }
         /// <summary>
         /// Gets the closure of the interval. The closure is the smallest proper interval which
         /// contains this interval.
         /// </summary>
-        [JsonIgnore]
-        public RangeF Closure => new RangeF(Min - float.Epsilon, Max + float.Epsilon);
-
+        public RangeF Closure()
+        {
+            return new RangeF(Min - float.Epsilon, Max + float.Epsilon);
+        }
         /// <summary>
         /// Gets a value indicating whether or not the specified value is contained within the
         /// closed interval.
