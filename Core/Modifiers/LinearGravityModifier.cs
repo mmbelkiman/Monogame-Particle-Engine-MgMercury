@@ -2,8 +2,16 @@
 {
     public class LinearGravityModifier : IModifier
     {
+        public string Name = "LinearGravityModifier";
         public Axis Direction { get; set; }
         public float Strength { get; set; }
+
+        public LinearGravityModifier() { }
+        public LinearGravityModifier(Axis direction, float strength)
+        {
+            Direction = direction;
+            Strength = strength;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

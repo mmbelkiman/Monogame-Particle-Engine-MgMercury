@@ -2,9 +2,19 @@
 {
     public sealed class RectContainerModifier : IModifier
     {
+        public string Name = "RectContainerModifier";
         public int Width { get; set; }
         public int Height { get; set; }
         public float RestitutionCoefficient { get; set; } = 1;
+
+        public RectContainerModifier() { }
+
+        public RectContainerModifier(int width, int height, float restitutionCoefficient)
+        {
+            Width = width;
+            Height = height;
+            RestitutionCoefficient = restitutionCoefficient;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

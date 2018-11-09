@@ -2,6 +2,8 @@
 {
     public sealed class OpacityFastFadeModifier : IModifier
     {
+        public string Name = "OpacityFastFadeModifier";
+        public OpacityFastFadeModifier() { }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

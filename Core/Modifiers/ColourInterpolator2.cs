@@ -1,10 +1,16 @@
-﻿namespace MonoGameMPE.Core.Modifiers
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+
+namespace MonoGameMPE.Core.Modifiers
 {
     /// <summary>
     /// Defines a modifier which interpolates the colour of a particle over the course of its lifetime.
     /// </summary>
     public sealed class ColourInterpolator2 : IModifier
     {
+        public string Name = "ColourInterpolator2";
+
         /// <summary>
         /// Gets or sets the initial colour of particles when they are released.
         /// </summary>
@@ -14,6 +20,14 @@
         /// Gets or sets the final colour of particles when they are retired.
         /// </summary>
         public Colour FinalColour { get; set; }
+
+        public ColourInterpolator2() { }
+
+        public ColourInterpolator2(Colour initialColour, Colour finalColour)
+        {
+            InitialColour = initialColour;
+            FinalColour = finalColour;
+        }
 
         public unsafe void Update(float elapsedseconds, ParticleBuffer.ParticleIterator iterator)
         {

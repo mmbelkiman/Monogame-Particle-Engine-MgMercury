@@ -2,8 +2,17 @@
 {
     public class RectLoopContainerModifier : IModifier
     {
+        public string Name = "RectLoopContainerModifier";
         public int Width { get; set; }
         public int Height { get; set; }
+
+        public RectLoopContainerModifier() { }
+
+        public RectLoopContainerModifier(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

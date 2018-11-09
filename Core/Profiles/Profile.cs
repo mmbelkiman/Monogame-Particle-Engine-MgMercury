@@ -7,10 +7,10 @@ namespace MonoGameMPE.Core.Profiles
     {
         public string Name = "";
 
-        public Axis Axis { get; set; }
-        public float Length { get; set; }
-        public Axis Direction { get; set; }
-        public float Spread { get; set; }
+        public Axis Axis = Axis.Up;
+        public float Length = 100;
+        public Axis Direction = Axis.Up;
+        public float Spread = 100;
         public float Radius = 100;
         public CircleRadiation Radiate = CircleRadiation.In;
         public float Width = 100;

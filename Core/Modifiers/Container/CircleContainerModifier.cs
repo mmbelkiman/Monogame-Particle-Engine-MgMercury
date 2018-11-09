@@ -4,9 +4,19 @@ namespace MonoGameMPE.Core.Modifiers.Container
 {
     public class CircleContainerModifier : IModifier
     {
+        public string Name = "CircleContainerModifier";
         public float Radius { get; set; }
         public bool Inside { get; set; } = true;
         public float RestitutionCoefficient { get; set; } = 1;
+
+        public CircleContainerModifier() { }
+
+        public CircleContainerModifier(float radius, bool inside, float restitutionCoefficient)
+        {
+            Radius = radius;
+            Inside = inside;
+            RestitutionCoefficient = restitutionCoefficient;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

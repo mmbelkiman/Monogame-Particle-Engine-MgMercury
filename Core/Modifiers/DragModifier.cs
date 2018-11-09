@@ -2,8 +2,21 @@
 {
     public class DragModifier : IModifier
     {
-        public float DragCoefficient { get; set; } = 0.47f;
-        public float Density { get; set; } = .5f;
+        public string Name = "DragModifier";
+
+        public float DragCoefficient;
+        public float Density;
+
+        public DragModifier()
+        {
+
+        }
+
+        public DragModifier(float dragCoefficient, float density)
+        {
+            DragCoefficient = dragCoefficient;
+            Density = density;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {
