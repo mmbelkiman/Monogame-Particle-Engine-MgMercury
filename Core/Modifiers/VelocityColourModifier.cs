@@ -4,9 +4,19 @@ namespace MonoGameMPE.Core.Modifiers
 {
     public class VelocityColourModifier : IModifier
     {
+        public String Name = "VelocityColourModifier";
         public Colour StationaryColour { get; set; }
         public Colour VelocityColour { get; set; }
         public float VelocityThreshold { get; set; }
+
+        public VelocityColourModifier() { }
+
+        public VelocityColourModifier(Colour stationaryColour, Colour velocityColour, float velocityThreshold)
+        {
+            StationaryColour = stationaryColour;
+            VelocityColour = velocityColour;
+            VelocityThreshold = velocityThreshold;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

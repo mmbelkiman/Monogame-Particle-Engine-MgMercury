@@ -42,14 +42,35 @@ namespace MonoGameMPE.Core.Modifiers
                 case "OpacityFastFadeModifier":
                     return new OpacityFastFadeModifier();
                 case "OpacityInterpolator2":
-                    return new OpacityInterpolator2((float)item["InitialOpacity"], (float)item["MediumOpacity"], (float)item["FinalOpacity"]);
+                    return new OpacityInterpolator2((float)item["InitialOpacity"], (float)item["FinalOpacity"]);
+                case "OpacityInterpolator3":
+                    return new OpacityInterpolator3((float)item["InitialOpacity"], (float)item["MediumOpacity"], (float)item["FinalOpacity"]);
                 case "RotationModifier":
                     return new RotationModifier((float)item["RotationRate"]);
                 case "ScaleInterpolator2":
                     return new ScaleInterpolator2(
                         new Vector((float)item["InitialScale"]["X"], (float)item["InitialScale"]["Y"]),
                         new Vector((float)item["FinalScale"]["X"], (float)item["FinalScale"]["Y"]));
-
+                case "VelocityColourInfiniteModifier":
+                    return new VelocityColourInfiniteModifier(
+                          new Colour((float)item["Colour1"]["H"], (float)item["Colour1"]["S"], (float)item["Colour1"]["L"]),
+                          new Colour((float)item["Colour2"]["H"], (float)item["Colour2"]["S"], (float)item["Colour2"]["L"]),
+                          (float)item["VelocityChangeColor"]);
+                case "VelocityColourModifier":
+                    return new VelocityColourModifier(
+                          new Colour((float)item["StationaryColour"]["H"], (float)item["StationaryColour"]["S"], (float)item["StationaryColour"]["L"]),
+                          new Colour((float)item["VelocityColour"]["H"], (float)item["VelocityColour"]["S"], (float)item["VelocityColour"]["L"]),
+                          (float)item["VelocityThreshold"]);
+                case "VelocityHueModifier":
+                    return new VelocityHueModifier(
+                              (float)item["StationaryHue"],
+                              (float)item["VelocityHue"],
+                              (float)item["VelocityThreshold"]);
+                case "VortexModifier":
+                    return new VortexModifier(
+                        new Vector((float)item["Position"]["X"], (float)item["Position"]["Y"]),
+                        (float)item["Mass"],
+                        (float)item["MaxSpeed"]);
                 default:
                     throw new NotImplementedException();
             }

@@ -7,6 +7,7 @@ namespace MonoGameMPE.Core
     {
         public float Inception;
         public float Age;
+        public float StartAge;
         public Vector Position;
         public Vector TriggerPos;
         public Vector Velocity;
@@ -15,6 +16,7 @@ namespace MonoGameMPE.Core
         public Vector Scale;
         public float Rotation;
         public float Mass;
+        public float Term;
 
         public static readonly int SizeInBytes = Marshal.SizeOf(typeof(Particle));
     }

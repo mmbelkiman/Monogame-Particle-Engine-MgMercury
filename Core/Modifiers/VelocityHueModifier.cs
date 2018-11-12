@@ -5,9 +5,19 @@ namespace MonoGameMPE.Core.Modifiers
 {
     public class VelocityHueModifier : IModifier
     {
+        public string Name = "VelocityHueModifier";
         public float StationaryHue { get; set; }
         public float VelocityHue { get; set; }
         public float VelocityThreshold { get; set; }
+
+        public VelocityHueModifier() { }
+
+        public VelocityHueModifier(float stationaryHue, float velocityHue, float velocityThreshold)
+        {
+            StationaryHue = stationaryHue;
+            VelocityHue = velocityHue;
+            VelocityThreshold = velocityThreshold;
+        }
 
         public unsafe void Update(float elapsedSeconds, ParticleBuffer.ParticleIterator iterator)
         {

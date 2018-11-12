@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using MonoGameMPE.Core.Modifiers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 
 namespace MonoGameMPE.Core
@@ -14,6 +19,63 @@ namespace MonoGameMPE.Core
         public ParticleEffect()
         {
             Emitters = new Dictionary<string, Emitter>();
+        }
+
+        public static ParticleEffect ReadFromJsonFile(string filePath, GraphicsDevice graphicsDevice)
+        {
+            TextReader reader = null;
+            try
+            {
+                reader = new StreamReader(filePath);
+                var fileContents = reader.ReadToEnd();
+                var settings = new JsonSerializerSettings();
+
+                settings.Converters.Add(new IModifierJsonConverter());
+                ParticleEffect pf = JsonConvert.DeserializeObject<ParticleEffect>(fileContents, settings);
+                pf.UpdateEmmitersTexture(graphicsDevice);
+                return JsonConvert.DeserializeObject<ParticleEffect>(fileContents, settings);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+        }
+
+        public void UpdateEmmitersTexture(GraphicsDevice graphicsDevice)
+        {
+            foreach (var item in Emitters)
+            {
+                item.Value.Parameters.Quantity = 1;
+
+                if (item.Value.TexturePath.Equals(""))
+                {
+                    item.Value.Texture = new Texture2D(graphicsDevice, 1, 1);
+                    // item.Value.Texture.SetData<Color>(new[] { Color.White });
+                }
+                else
+                {
+                    item.Value.Texture = LoadImageNormal(item.Value.TexturePath, graphicsDevice);
+                }
+
+                if (item.Value.ModifierExecutionStrategy.Name.Equals("Parallel"))
+                {
+                    item.Value.ModifierExecutionStrategy = ModifierExecutionStrategy.Parallel();
+                }
+                else
+                {
+                    item.Value.ModifierExecutionStrategy = ModifierExecutionStrategy.Serial();
+                }
+            }
+        }
+
+        private Texture2D LoadImageNormal(string fileName, GraphicsDevice graphicsDevice)
+        {
+            FileStream fileStream = new FileStream(fileName, FileMode.Open);
+            Texture2D spriteAtlas = Texture2D.FromStream(graphicsDevice, fileStream);
+            spriteAtlas.Name = fileName;
+            fileStream.Dispose();
+            return spriteAtlas;
         }
 
         public int ActiveParticles => Emitters.Sum(t => t.Value.ActiveParticles);

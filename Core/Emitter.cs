@@ -99,7 +99,21 @@ namespace MonoGameMPE.Core
 
         //TODO
         [JsonIgnore]
-        public Texture2D Texture { get; set; }
+        public Texture2D Texture
+        {
+            get { return _texture; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value.Name))
+                {
+                    TexturePath = value.Name;
+                }
+                _texture = value;
+            }
+        }
+
+        public string TexturePath = "";
+        private Texture2D _texture;
 
         public bool HasExpired = false;
         public bool Loop = true;
@@ -122,6 +136,7 @@ namespace MonoGameMPE.Core
                     break;
 
                 expired++;
+                particle->StartAge = 0f;
             }
             if (expired != 0)
             {
@@ -154,6 +169,13 @@ namespace MonoGameMPE.Core
             {
                 var particle = iterator.Next();
                 particle->Age = (_totalSeconds - particle->Inception) / _term;
+
+                if (particle->StartAge == 0)
+                {
+                    particle->StartAge = particle->Age;
+                    particle->Term = _term;
+                }
+
 
                 particle->Position = particle->Position + particle->Velocity * elapsedSeconds;
             }
@@ -207,6 +229,7 @@ namespace MonoGameMPE.Core
                 Profile.GetOffsetAndHeading(out particle->Position, out heading);
 
                 particle->Age = 0f;
+
                 particle->Inception = _totalSeconds;
 
                 particle->Position += position;

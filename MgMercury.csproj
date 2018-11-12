@@ -71,6 +71,7 @@
     <Compile Include="Core\Modifiers\Container\RectLoopContainerModifier.cs" />
     <Compile Include="Core\Modifiers\IModifier.cs" />
     <Compile Include="Core\Modifiers\OpacityFastFadeModifier.cs" />
+    <Compile Include="Core\Modifiers\OpacityInterpolator3.cs" />
     <Compile Include="Core\Modifiers\OpacityInterpolator2.cs" />
     <Compile Include="Core\Modifiers\RotationModifier.cs" />
     <Compile Include="Core\Modifiers\ScaleInterpolator2.cs" />
