@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGameMPE.Core.Modifiers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 
@@ -21,7 +21,7 @@ namespace MonoGameMPE.Core
             Emitters = new Dictionary<string, Emitter>();
         }
 
-        public static ParticleEffect ReadFromJsonFile(string filePath, GraphicsDevice graphicsDevice)
+        public static ParticleEffect ReadFromJsonFile(string filePath, GraphicsDevice graphicsDevice, ContentManager content)
         {
             TextReader reader = null;
             try
@@ -29,11 +29,12 @@ namespace MonoGameMPE.Core
                 reader = new StreamReader(filePath);
                 var fileContents = reader.ReadToEnd();
                 var settings = new JsonSerializerSettings();
+                var jsonPath = filePath.Substring(0, filePath.LastIndexOf("\\")) + "\\";
 
                 settings.Converters.Add(new IModifierJsonConverter());
                 ParticleEffect pf = JsonConvert.DeserializeObject<ParticleEffect>(fileContents, settings);
-                pf.UpdateEmmitersTexture(graphicsDevice);
-                return JsonConvert.DeserializeObject<ParticleEffect>(fileContents, settings);
+                pf.UpdateEmmitersTexture(jsonPath, graphicsDevice, content);
+                return pf;
             }
             finally
             {
@@ -42,7 +43,7 @@ namespace MonoGameMPE.Core
             }
         }
 
-        public void UpdateEmmitersTexture(GraphicsDevice graphicsDevice)
+        public void UpdateEmmitersTexture(String jsonPath, GraphicsDevice graphicsDevice, ContentManager content)
         {
             foreach (var item in Emitters)
             {
@@ -55,7 +56,14 @@ namespace MonoGameMPE.Core
                 }
                 else
                 {
-                    item.Value.Texture = LoadImageNormal(item.Value.TexturePath, graphicsDevice);
+                    if (!jsonPath.Equals(""))
+                    {
+                        item.Value.Texture = LoadImage(jsonPath + item.Value.TexturePath, graphicsDevice, content);
+                    }
+                    else
+                    {
+                        item.Value.Texture = LoadImage(item.Value.TexturePath, graphicsDevice, content);
+                    }
                 }
 
                 if (item.Value.ModifierExecutionStrategy.Name.Equals("Parallel"))
@@ -69,12 +77,37 @@ namespace MonoGameMPE.Core
             }
         }
 
+        private Texture2D LoadImage(String fileName, GraphicsDevice graphicsDevice, ContentManager content)
+        {
+            if (fileName.Contains(".xnb"))
+            {
+                return LoadImageXNB(fileName, content);
+            }
+            else
+            {
+                return LoadImageNormal(fileName, graphicsDevice);
+            }
+        }
+
+        private Texture2D LoadImageXNB(string fileName, ContentManager content)
+        {
+            return content.Load<Texture2D>(fileName.Replace(".xnb", ""));
+        }
+
         private Texture2D LoadImageNormal(string fileName, GraphicsDevice graphicsDevice)
         {
-            FileStream fileStream = new FileStream(fileName, FileMode.Open);
-            Texture2D spriteAtlas = Texture2D.FromStream(graphicsDevice, fileStream);
-            spriteAtlas.Name = fileName;
-            fileStream.Dispose();
+            Texture2D spriteAtlas = null;
+            try
+            {
+                FileStream fileStream = new FileStream(fileName, FileMode.Open);
+                spriteAtlas = Texture2D.FromStream(graphicsDevice, fileStream);
+                spriteAtlas.Name = fileName;
+                fileStream.Dispose();
+            }
+            catch
+            {
+                Console.WriteLine("Cannot open file " + fileName);
+            }
             return spriteAtlas;
         }
 

@@ -106,7 +106,8 @@ namespace MonoGameMPE.Core
             {
                 if (!string.IsNullOrEmpty(value.Name))
                 {
-                    TexturePath = value.Name;
+                    var lastIndex = value.Name.LastIndexOf("\\") + 1;
+                    TexturePath = value.Name.Substring(lastIndex, value.Name.Length- lastIndex);
                 }
                 _texture = value;
             }
