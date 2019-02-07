@@ -22,11 +22,11 @@ namespace MonoGameMPE.Core.Modifiers
             switch (item["Name"].Value<string>())
             {
                 case "CircleContainerModifier":
-                    return new CircleContainerModifier((float)item["radius"], (bool)item["inside"], (float)item["restitutionCoefficient"]);
+                    return new CircleContainerModifier((float)item["Radius"], (bool)item["Inside"], (float)item["RestitutionCoefficient"]);
                 case "RectContainerModifier":
-                    return new RectContainerModifier((int)item["width"], (int)item["height"], (float)item["restitutionCoefficient"]);
+                    return new RectContainerModifier((int)item["Width"], (int)item["Height"], (float)item["RestitutionCoefficient"]);
                 case "RectLoopContainerModifier":
-                    return new RectLoopContainerModifier((int)item["width"], (int)item["height"]);
+                    return new RectLoopContainerModifier((int)item["Width"], (int)item["Height"]);
                 case "ColourInterpolator2":
                     return new ColourInterpolator2(
                         new Colour((float)item["InitialColour"]["H"], (float)item["InitialColour"]["S"], (float)item["InitialColour"]["L"]),
