@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     /// <summary>
     /// Defines a random number generator which uses the FastRand algorithm to generate random values.

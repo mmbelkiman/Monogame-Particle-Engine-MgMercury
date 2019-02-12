@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-
-namespace MonoGameMPE.Core.Modifiers
+﻿namespace VenusParticleEngine.Core.Modifiers
 {
     /// <summary>
     /// Defines a modifier which interpolates the colour of a particle over the course of its lifetime.

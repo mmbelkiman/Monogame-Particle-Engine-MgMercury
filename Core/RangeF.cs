@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     /// <summary>
     /// Represents a closed interval of floating point values.

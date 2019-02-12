@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core.Modifiers
+namespace VenusParticleEngine.Core.Modifiers
 {
     public class VelocityColourInfiniteModifier : IModifier
     {

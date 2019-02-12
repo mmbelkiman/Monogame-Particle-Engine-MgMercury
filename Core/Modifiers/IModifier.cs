@@ -1,9 +1,9 @@
-﻿using MonoGameMPE.Core.Modifiers.Container;
+﻿using VenusParticleEngine.Core.Modifiers.Container;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace MonoGameMPE.Core.Modifiers
+namespace VenusParticleEngine.Core.Modifiers
 {
     public interface IModifier
     {

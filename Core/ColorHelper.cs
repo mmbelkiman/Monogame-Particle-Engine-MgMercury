@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoGameMPE.Core;
+using VenusParticleEngine.Core;
 
-namespace MonoGameMPE
+namespace VenusParticleEngine
 {
     public static class ColorHelper
     {

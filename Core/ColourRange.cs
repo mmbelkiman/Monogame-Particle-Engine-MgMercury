@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     public struct ColourRange
     {

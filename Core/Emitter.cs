@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameMPE.Core.Modifiers;
-using MonoGameMPE.Core.Profiles;
+using VenusParticleEngine.Core.Modifiers;
+using VenusParticleEngine.Core.Profiles;
 using Newtonsoft.Json;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     [Serializable]
     public unsafe class Emitter : IDisposable

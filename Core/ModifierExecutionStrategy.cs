@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MonoGameMPE.Core.Modifiers;
+using VenusParticleEngine.Core.Modifiers;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     using TPL = System.Threading.Tasks;
 

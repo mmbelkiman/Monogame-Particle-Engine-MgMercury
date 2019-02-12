@@ -1,19 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
-    public static class SpriteBatchRenderer
+    [Obsolete("SpriteBatchRenderer is deprecated, please use SpriteBatchRender instead.")]
+    public class SpriteBatchRenderer
     {
-        public static void Draw(this SpriteBatch spriteBatch, ParticleEffect effect)
+        /// <summary>
+        /// Draw a particle effect. This draw function calls spritebatch.Begin() and .End()
+        /// </summary>
+        public void Draw(ParticleEffect effect, SpriteBatch s)
         {
             foreach (var emitter in effect.Emitters)
-                DrawParticle(emitter.Value, spriteBatch);
+                Draw(emitter.Value, s);
         }
 
-        private static unsafe void DrawParticle(Emitter emitter, SpriteBatch spriteBatch)
+        private unsafe void Draw(Emitter emitter, SpriteBatch s)
         {
-            if (emitter.Texture == null) return;
             var texture = emitter.Texture;
             var origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
@@ -21,27 +25,33 @@ namespace MonoGameMPE.Core
                 ? BlendState.Additive
                 : BlendState.AlphaBlend;
 
+            //TODO var sortMode = emitter.RenderingOrder == RenderingOrder.BackToFront ?
+
+            s.Begin(SpriteSortMode.Deferred, blendState);
+
             var iterator = emitter.Buffer.Iterator;
+
             while (iterator.HasNext)
             {
                 var particle = iterator.Next();
+
                 var color = particle->Colour.ToRgb();
                 if (blendState == BlendState.AlphaBlend)
                     color *= particle->Opacity;
                 else
                     color.A = (byte)(particle->Opacity * 255);
 
-                spriteBatch.Draw(
-                    texture,
+                s.Draw(texture,
                     new Vector2(particle->Position.X, particle->Position.Y),
-                    null,
-                    new Color(color, particle->Opacity),
+                    null, null, origin,
                     particle->Rotation,
-                    origin,
                     new Vector2(particle->Scale.X / texture.Width, particle->Scale.Y / texture.Height),
-                    emitter.SpriteEffects,
-                    emitter.LayerDepth);
+                    new Color(color, particle->Opacity));
+
             }
+
+            s.End();
+
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     [Serializable]
     public class ParticleBuffer : IDisposable

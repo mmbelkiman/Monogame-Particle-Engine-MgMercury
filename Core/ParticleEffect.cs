@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameMPE.Core.Modifiers;
+using VenusParticleEngine.Core.Modifiers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     [Serializable]
     public class ParticleEffect
@@ -91,7 +91,17 @@ namespace MonoGameMPE.Core
 
         private Texture2D LoadImageXNB(string fileName, ContentManager content)
         {
-            return content.Load<Texture2D>(fileName.Replace(".xnb", ""));
+            Texture2D texture = null;
+            try
+            {
+                texture = content.Load<Texture2D>(fileName.Replace(".xnb", ""));
+            }
+            catch
+            {
+                throw new FileNotFoundException("Cannot open file", fileName);
+            }
+
+            return texture;
         }
 
         private Texture2D LoadImageNormal(string fileName, GraphicsDevice graphicsDevice)
@@ -107,6 +117,7 @@ namespace MonoGameMPE.Core
             catch
             {
                 Console.WriteLine("Cannot open file " + fileName);
+                throw new FileNotFoundException("Cannot open file", fileName);
             }
             return spriteAtlas;
         }

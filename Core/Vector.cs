@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     /// <summary>
     /// Defines a data structure representing a Euclidean vector facing a particular direction,

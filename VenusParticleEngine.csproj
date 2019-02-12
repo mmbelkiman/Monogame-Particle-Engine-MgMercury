@@ -7,8 +7,8 @@
     <ProjectGuid>{BCBB56D3-7F48-463E-8411-79A515087D3C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonoGameMPE</RootNamespace>
-    <AssemblyName>MonoGameMPE</AssemblyName>
+    <RootNamespace>VenusParticleEngine</RootNamespace>
+    <AssemblyName>VenusParticleEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -35,9 +35,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MonoGame.Framework, Version=3.7.0.1707, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+      <HintPath>libs\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -96,6 +96,7 @@
     <Compile Include="Core\ReleaseParameters.cs" />
     <Compile Include="Core\RenderingOrder.cs" />
     <Compile Include="Core\SpritebatchRenderer.cs" />
+    <Compile Include="Core\SpritebatchRendererOld.cs" />
     <Compile Include="Core\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

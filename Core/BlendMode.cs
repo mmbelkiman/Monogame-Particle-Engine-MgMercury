@@ -1,4 +1,4 @@
-﻿namespace MonoGameMPE.Core
+﻿namespace VenusParticleEngine.Core
 {
     public enum BlendMode
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     /// <summary>
     /// Defines a part of a line that is bounded by two distinct end points.

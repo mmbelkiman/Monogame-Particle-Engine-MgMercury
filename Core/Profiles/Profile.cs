@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core.Profiles
+namespace VenusParticleEngine.Core.Profiles
 {
     [Serializable]
     public class Profile : ICloneable

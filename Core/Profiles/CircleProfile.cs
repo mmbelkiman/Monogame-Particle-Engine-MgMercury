@@ -1,4 +1,4 @@
-﻿namespace MonoGameMPE.Core.Profiles
+﻿namespace VenusParticleEngine.Core.Profiles
 {
     public class CircleProfile : Profile
     {

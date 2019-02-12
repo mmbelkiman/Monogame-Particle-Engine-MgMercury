@@ -1,4 +1,4 @@
-﻿namespace MonoGameMPE.Core.Modifiers.Container
+﻿namespace VenusParticleEngine.Core.Modifiers.Container
 {
     public class RectLoopContainerModifier : IModifier
     {

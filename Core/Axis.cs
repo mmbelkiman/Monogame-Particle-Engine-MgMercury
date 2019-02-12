@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     /// <summary>
     /// An immutable data structure representing a directed fixed axis.

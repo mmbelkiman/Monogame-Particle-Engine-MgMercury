@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     [Serializable]
     public class ReleaseParameters

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct Particle

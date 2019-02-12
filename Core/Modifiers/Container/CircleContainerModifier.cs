@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonoGameMPE.Core.Modifiers.Container
+namespace VenusParticleEngine.Core.Modifiers.Container
 {
     public class CircleContainerModifier : IModifier
     {

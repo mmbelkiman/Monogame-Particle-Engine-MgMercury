@@ -1,4 +1,4 @@
-﻿namespace MonoGameMPE.Core.Modifiers
+﻿namespace VenusParticleEngine.Core.Modifiers
 {
     public class DragModifier : IModifier
     {

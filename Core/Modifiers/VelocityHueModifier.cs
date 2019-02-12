@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace MonoGameMPE.Core.Modifiers
+namespace VenusParticleEngine.Core.Modifiers
 {
     public class VelocityHueModifier : IModifier
     {

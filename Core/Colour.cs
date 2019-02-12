@@ -2,7 +2,7 @@
 using System.Globalization;
 using Microsoft.Xna.Framework;
 
-namespace MonoGameMPE.Core
+namespace VenusParticleEngine.Core
 {
     /// <summary>
     /// An immutable data structure representing a 24bit colour composed of separate hue, saturation and lightness channels.
