@@ -95,8 +95,8 @@
     <Compile Include="Core\RangeF.cs" />
     <Compile Include="Core\ReleaseParameters.cs" />
     <Compile Include="Core\RenderingOrder.cs" />
+    <Compile Include="Core\SpriteBatchRender.cs" />
     <Compile Include="Core\SpritebatchRenderer.cs" />
-    <Compile Include="Core\SpritebatchRendererOld.cs" />
     <Compile Include="Core\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
