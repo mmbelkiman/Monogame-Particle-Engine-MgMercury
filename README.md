@@ -1,4 +1,4 @@
-This repository is a version of the [MgMercury](https://github.com/Jjagg/MgMercury) usable with [MonoGame](https://github.com/mono/MonoGame).
+This repository is a version of the [MgMercury](https://github.com/Jjagg/MgMercury) usable with [MonoGame](https://github.com/mono/MonoGame). <br />
 MgMercury is a particle engine based on  [Mercury Particle Engine](https://github.com/Matthew-Davey/mercury-particle-engine)
 
 ![](https://media.giphy.com/media/bbSYumsbuysZEpqpgN/giphy.gif)
@@ -33,7 +33,7 @@ foreach (var item in _particleEffectJson.Emitters)
 ```
 
 ## Particle Editor
-Venus has an editor that can upload and save json files.
+Venus has an editor that can upload and save json files.  <br />
 [![Itch.io](https://jessemillar.com/available-on-itchio-badge/badge-bw.png)](https://mmbelkiman.itch.io/venus-particle-editor) <br />
 
 [Repository](https://github.com/mmbelkiman/Venus-Particle-Editor)
