@@ -34,7 +34,8 @@ foreach (var item in _particleEffectJson.Emitters)
 
 ## Particle Editor
 Venus has an editor that can upload and save json files.
-[Download (bin)](https://mmbelkiman.itch.io/venus-particle-editor)
+[![Itch.io](https://jessemillar.com/available-on-itchio-badge/badge-bw.png)](https://mmbelkiman.itch.io/venus-particle-editor) <br />
+
 [Repository](https://github.com/mmbelkiman/Venus-Particle-Editor)
 
 # Structure
