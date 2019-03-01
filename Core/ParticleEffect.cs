@@ -56,13 +56,13 @@ namespace VenusParticleEngine.Core
                 }
                 else
                 {
-                    if (!jsonPath.Equals(""))
+                    if (jsonPath.Equals(""))
                     {
-                        item.Value.Texture = LoadImage(jsonPath + item.Value.TexturePath, graphicsDevice, content);
+                        item.Value.Texture = LoadImage(item.Value.TexturePath, graphicsDevice, content);
                     }
                     else
                     {
-                        item.Value.Texture = LoadImage(item.Value.TexturePath, graphicsDevice, content);
+                        item.Value.Texture = LoadImage(jsonPath + item.Value.TexturePath, graphicsDevice, content);
                     }
                 }
 
@@ -94,10 +94,11 @@ namespace VenusParticleEngine.Core
             Texture2D texture = null;
             try
             {
-                texture = content.Load<Texture2D>(fileName.Replace(".xnb", ""));
+                texture = content.Load<Texture2D>(fileName.ToLower().Replace(".xnb", "").Replace("content\\",""));
             }
             catch
             {
+                Console.WriteLine("Cannot open file " + fileName);
                 throw new FileNotFoundException("Cannot open file", fileName);
             }
 
