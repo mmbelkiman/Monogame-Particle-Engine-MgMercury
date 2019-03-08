@@ -21,6 +21,24 @@ namespace VenusParticleEngine.Core
             Emitters = new Dictionary<string, Emitter>();
         }
 
+        public static ParticleEffect ReadFromJson(string jsonPath, string jsonString, GraphicsDevice graphicsDevice, ContentManager content)
+        {
+            try
+            {
+                var settings = new JsonSerializerSettings();
+
+                settings.Converters.Add(new IModifierJsonConverter());
+                ParticleEffect pf = JsonConvert.DeserializeObject<ParticleEffect>(jsonString, settings);
+                pf.UpdateEmmitersTexture(jsonPath, graphicsDevice, content);
+                return pf;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
         public static ParticleEffect ReadFromJsonFile(string filePath, GraphicsDevice graphicsDevice, ContentManager content)
         {
             TextReader reader = null;
@@ -94,7 +112,7 @@ namespace VenusParticleEngine.Core
             Texture2D texture = null;
             try
             {
-                texture = content.Load<Texture2D>(fileName.ToLower().Replace(".xnb", "").Replace("content\\",""));
+                texture = content.Load<Texture2D>(fileName.ToLower().Replace(".xnb", "").Replace("content\\", ""));
             }
             catch
             {
