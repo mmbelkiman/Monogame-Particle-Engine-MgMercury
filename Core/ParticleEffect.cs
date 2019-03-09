@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using VenusParticleEngine.Core.Modifiers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using VenusParticleEngine.Core.Modifiers;
 
 namespace VenusParticleEngine.Core
 {
@@ -34,7 +34,7 @@ namespace VenusParticleEngine.Core
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Venus Particle Engine : ParticleEffect => " + e.Message);
                 return null;
             }
         }
@@ -54,10 +54,17 @@ namespace VenusParticleEngine.Core
                 pf.UpdateEmmitersTexture(jsonPath, graphicsDevice, content);
                 return pf;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Venus Particle Engine : ParticleEffect => " + e.Message);
+                return null;
+            }
             finally
             {
                 if (reader != null)
+                {
                     reader.Close();
+                }
             }
         }
 
@@ -189,6 +196,5 @@ namespace VenusParticleEngine.Core
         {
             active = !active;
         }
-
     }
 }
