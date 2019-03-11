@@ -12,7 +12,7 @@ MgMercury is a particle engine based on  [Mercury Particle Engine](https://githu
  - New SpriteBachRender
 
 ## Depedencies
- - [Newtonsoft.Json 11.0.2](https://github.com/JamesNK/Newtonsoft.Json/tree/11.0.2)
+ - [Newtonsoft.Json 12.0.1](https://github.com/JamesNK/Newtonsoft.Json/tree/11.0.2)
  - Monogame 3.7 or higher
 
 ## Load from Json
