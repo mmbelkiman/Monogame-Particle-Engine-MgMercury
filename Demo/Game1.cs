@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using VenusParticleEngine.Core;
 using VenusParticleEngine.Core.Modifiers;
 using VenusParticleEngine.Core.Modifiers.Container;
@@ -11,19 +12,33 @@ namespace Demo
 {
     public class Game1 : Game
     {
-        GraphicsDeviceManager _graphics;
-        SpriteBatch _spriteBatch;
-
-        ParticleEffect _particleEffectSquare;
-        ParticleEffect _particleEffectImage;
-        ParticleEffect _particleEffectJson;
-
-        Vector _particleJsonPosition = new Vector(700, 0);
-
+        private GraphicsDeviceManager _graphics;
+        private ParticleEffect _particleEffectImage;
+        private ParticleEffect _particleEffectJson;
+        private ParticleEffect _particleEffectJsonString;
+        private ParticleEffect _particleEffectSquare;
+        private Vector _particleJsonPosition = new Vector(700, 0);
+        private SpriteBatch _spriteBatch;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Black);
+
+            _spriteBatch.Begin();
+            {
+                _spriteBatch.Draw(_particleEffectSquare);
+                _spriteBatch.Draw(_particleEffectImage);
+                _spriteBatch.Draw(_particleEffectJson);
+                _spriteBatch.Draw(_particleEffectJsonString);
+            }
+            _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         protected override void Initialize()
@@ -31,52 +46,40 @@ namespace Demo
             ParticleInitSquare();
             ParticleInitImage();
             ParticleInitJson();
+            ParticleInitJsonString();
 
             base.Initialize();
         }
 
-        private void ParticleInitSquare()
+        protected override void LoadContent()
         {
-            _particleEffectSquare = new ParticleEffect();
-            Texture2D blankTexture = new Texture2D(GraphicsDevice, 1, 1);
-            blankTexture.SetData(new[] { Color.White });
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+        }
 
-            Dictionary<string, IModifier> Modifiers = new Dictionary<string, IModifier>
+        protected override void Update(GameTime gameTime)
+        {
+            //Square
+            _particleEffectSquare.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            _particleEffectSquare.Trigger(new Vector(150, 350));
+
+            //Image
+            _particleEffectImage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            _particleEffectImage.Trigger(new Vector(400, 250));
+
+            //Json
+            _particleEffectJson.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            _particleJsonPosition.Y += 10;
+            _particleEffectJson.Trigger(_particleJsonPosition);
+
+            _particleEffectJsonString.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            _particleEffectJsonString.Trigger(new Vector(150, 150));
+
+            if (_particleJsonPosition.Y > 1000)
             {
-                {
-                    "effect1", new ColourInterpolator2
-                    {
-                        InitialColour = new Colour(0.33f, 0.5f, 0.5f),
-                        FinalColour = new Colour(0f, 0.5f, 0.5f)
-                    }
-                },
-                {
-                     "effect2", new RotationModifier
-                     {
-                          RotationRate = 1f
-                     }
+                _particleJsonPosition.Y = 0;
+            }
 
-                },
-                {
-                    "effect3", new RectContainerModifier
-                    {
-                        Height = 100,
-                        Width = 100,
-                    }
-                }
-            };
-
-            _particleEffectSquare.Emitters.Add("test", new Emitter(2000, TimeSpan.FromSeconds(2), Profile.Point())
-            {
-                Texture = blankTexture,
-                BlendMode = BlendMode.Alpha,
-                Parameters = new ReleaseParameters
-                {
-                    Speed = new RangeF(20f, 50f),
-                    Quantity = 3,
-                },
-                Modifiers = Modifiers
-            });
+            base.Update(gameTime);
         }
 
         private void ParticleInitImage()
@@ -92,14 +95,12 @@ namespace Demo
                           InitialScale = new Vector(10,10),
                           FinalScale =  new Vector(20,20)
                      }
-
                 },
                 {
                      "effect2", new RotationModifier
                      {
                           RotationRate = 1f
                      }
-
                 },
                 {
                     "effect3", new LinearGravityModifier
@@ -136,47 +137,86 @@ namespace Demo
             }
         }
 
-        protected override void LoadContent()
+        private void ParticleInitJsonString()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-        }
+            TextReader reader = null;
+            string fileContents = "";
 
-        protected override void Update(GameTime gameTime)
-        {
-            //Square
-            _particleEffectSquare.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            _particleEffectSquare.Trigger(new Vector(150, 350));
-
-            //Image
-            _particleEffectImage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            _particleEffectImage.Trigger(new Vector(400, 250));
-
-            //Json
-            _particleEffectJson.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            _particleJsonPosition.Y += 10;
-            _particleEffectJson.Trigger(_particleJsonPosition);
-
-            if (_particleJsonPosition.Y > 1000)
+            try
             {
-                _particleJsonPosition.Y = 0;
+                reader = new StreamReader(Content.RootDirectory + "/testParticle2.ptc");
+                fileContents = reader.ReadToEnd();
+                Console.WriteLine(fileContents);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
             }
 
-            base.Update(gameTime);
+            if (fileContents != null)
+            {
+                _particleEffectJsonString = ParticleEffect.ReadFromJson(
+                    Content.RootDirectory + "\\",
+                    fileContents,
+                    GraphicsDevice, Content);
+
+                foreach (var item in _particleEffectJsonString.Emitters)
+                {
+                    if (string.IsNullOrEmpty(item.Value.TexturePath))
+                    {
+                        item.Value.Texture = new Texture2D(GraphicsDevice, 1, 1);
+                        item.Value.Texture.SetData(new[] { Color.White });
+                    }
+                }
+            }
         }
 
-        protected override void Draw(GameTime gameTime)
+        private void ParticleInitSquare()
         {
-            GraphicsDevice.Clear(Color.Black);
+            _particleEffectSquare = new ParticleEffect();
+            Texture2D blankTexture = new Texture2D(GraphicsDevice, 1, 1);
+            blankTexture.SetData(new[] { Color.White });
 
-            _spriteBatch.Begin();
+            Dictionary<string, IModifier> Modifiers = new Dictionary<string, IModifier>
             {
-                _spriteBatch.Draw(_particleEffectSquare);
-                _spriteBatch.Draw(_particleEffectImage);
-                _spriteBatch.Draw(_particleEffectJson);
-            }
-            _spriteBatch.End();
+                {
+                    "effect1", new ColourInterpolator2
+                    {
+                        InitialColour = new Colour(0.33f, 0.5f, 0.5f),
+                        FinalColour = new Colour(0f, 0.5f, 0.5f)
+                    }
+                },
+                {
+                     "effect2", new RotationModifier
+                     {
+                          RotationRate = 1f
+                     }
+                },
+                {
+                    "effect3", new RectContainerModifier
+                    {
+                        Height = 100,
+                        Width = 100,
+                    }
+                }
+            };
 
-            base.Draw(gameTime);
+            _particleEffectSquare.Emitters.Add("test", new Emitter(2000, TimeSpan.FromSeconds(2), Profile.Point())
+            {
+                Texture = blankTexture,
+                BlendMode = BlendMode.Alpha,
+                Parameters = new ReleaseParameters
+                {
+                    Speed = new RangeF(20f, 50f),
+                    Quantity = 3,
+                },
+                Modifiers = Modifiers
+            });
         }
     }
 }

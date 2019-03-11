@@ -1,0 +1,161 @@
+{
+  "Name": null,
+  "Emitters": {
+    "principal": {
+      "SpriteEffects": 0,
+      "LayerDepth": 0.0,
+      "TexturePath": "star.xnb",
+      "HasExpired": false,
+      "Loop": true,
+      "ForceLoop": true,
+      "Capacity": 10,
+      "Term": "00:00:01",
+      "ActiveParticles": 10,
+      "BlendMode": 0,
+      "TextureKey": null,
+      "ReclaimFrequency": 1.0,
+      "Offset": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Length": 0.0,
+        "LengthSq": 0.0,
+        "Axis": {
+          "X": "NaN",
+          "Y": "NaN",
+          "Angle": "NaN"
+        }
+      },
+      "Modifiers": {
+        "OpacityFastFade": { "Name": "OpacityFastFadeModifier" },
+        "Rotation": {
+          "Name": "RotationModifier",
+          "RotationRate": 3.0
+        },
+        "ScaleInterpolator2": {
+          "Name": "ScaleInterpolator2",
+          "InitialScale": {
+            "X": 20.0,
+            "Y": 20.0,
+            "Length": 28.2842712,
+            "LengthSq": 800.0,
+            "Axis": {
+              "X": 0.707106769,
+              "Y": 0.707106769,
+              "Angle": 0.7853982
+            }
+          },
+          "FinalScale": {
+            "X": 40.0,
+            "Y": 40.0,
+            "Length": 56.5685425,
+            "LengthSq": 3200.0,
+            "Axis": {
+              "X": 0.707106769,
+              "Y": 0.707106769,
+              "Angle": 0.7853982
+            }
+          }
+        },
+        "Drag": {
+          "Name": "DragModifier",
+          "DragCoefficient": 1.5,
+          "Density": 80.1
+        },
+        "RectLoopContainerModifier": {
+          "Name": "RectLoopContainerModifier",
+          "Width": 100,
+          "Height": 100
+        }
+      },
+      "ModifierExecutionStrategy": { "Name": "Serial" },
+      "Profile": {
+        "Name": "CircleProfile",
+        "Axis": {
+          "X": 0.0,
+          "Y": -1.0,
+          "Angle": -1.57079637
+        },
+        "Length": 100.0,
+        "Direction": {
+          "X": 0.0,
+          "Y": -1.0,
+          "Angle": -1.57079637
+        },
+        "Spread": 100.0,
+        "Radius": 100.0,
+        "Radiate": 1,
+        "Width": 100.0,
+        "Height": 100.0
+      },
+      "Parameters": {
+        "Quantity": {
+          "Min": 1,
+          "Max": 1,
+          "Diameter": 0,
+          "Centre": 1,
+          "Radius": 0,
+          "IsDegenerate": true,
+          "IsProper": false
+        },
+        "Speed": {
+          "Min": 1.1,
+          "Max": 1.1,
+          "Diameter": 0.0,
+          "Centre": 1.1,
+          "Radius": 0.0,
+          "IsDegenerate": true,
+          "IsProper": false
+        },
+        "Colour": {
+          "Min": {
+            "H": 0.0,
+            "S": 0.29,
+            "L": 1.0
+          },
+          "Max": {
+            "H": 0.0,
+            "S": 0.29,
+            "L": 1.0
+          }
+        },
+        "Opacity": {
+          "Min": 0.0,
+          "Max": 0.0,
+          "Diameter": 0.0,
+          "Centre": 1.0,
+          "Radius": 0.0,
+          "IsDegenerate": true,
+          "IsProper": false
+        },
+        "Scale": {
+          "Min": 225.0,
+          "Max": 225.0,
+          "Diameter": 0.0,
+          "Centre": 225.0,
+          "Radius": 0.0,
+          "IsDegenerate": true,
+          "IsProper": false
+        },
+        "Rotation": {
+          "Min": 0.0,
+          "Max": 0.0,
+          "Diameter": 0.0,
+          "Centre": 0.0,
+          "Radius": 0.0,
+          "IsDegenerate": true,
+          "IsProper": false
+        },
+        "Mass": {
+          "Min": 1.1,
+          "Max": 1.1,
+          "Diameter": 0.0,
+          "Centre": 1.1,
+          "Radius": 0.0,
+          "IsDegenerate": true,
+          "IsProper": false
+        }
+      }
+    }
+  },
+  "ActiveParticles": 10
+}

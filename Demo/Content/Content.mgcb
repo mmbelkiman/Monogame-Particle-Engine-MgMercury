@@ -37,7 +37,7 @@
 /processorParam:TextureFormat=Color
 /build:heart.png
 
-#begin heart.png
+#begin star.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,8 +47,11 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:heart.png
+/build:star.png
 
 #begin testParticle.ptc
 /copy:testParticle.ptc
+
+#begin testParticle2.ptc
+/copy:testParticle2.ptc
 
