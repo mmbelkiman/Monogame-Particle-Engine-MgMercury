@@ -56,7 +56,7 @@ namespace VenusParticleEngine.Core
             }
             catch (Exception e)
             {
-                Console.WriteLine("Venus Particle Engine : ParticleEffect => " + e.Message);
+                Console.WriteLine("Venus Particle Engine : ParticleEffect (ReadFromJsonFile) => " + e.Message);
                 return null;
             }
             finally
@@ -123,7 +123,7 @@ namespace VenusParticleEngine.Core
             }
             catch
             {
-                Console.WriteLine("Cannot open file " + fileName);
+                Console.WriteLine("LoadImageXNB Cannot open file " + fileName);
                 throw new FileNotFoundException("Cannot open file", fileName);
             }
 
@@ -142,7 +142,7 @@ namespace VenusParticleEngine.Core
             }
             catch
             {
-                Console.WriteLine("Cannot open file " + fileName);
+                Console.WriteLine("LoadImageNormal Cannot open file " + fileName);
                 throw new FileNotFoundException("Cannot open file", fileName);
             }
             return spriteAtlas;
